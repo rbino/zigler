@@ -71,7 +71,7 @@ pub fn get_int(comptime T: type, env: beam.env, src: beam.term) !T {
                 std.mem.copy(u8, @ptrCast([*]u8, &buf)[0..bytes], result.data[0..bytes]);
                 // check to make sure that the top bits are all zeros.
                 const top_bit_count = (bytes * 8 - int.bits);
-                if (@clz(Bigger, buf) < top_bit_count) return Error.nif_argument_range_error;
+                if (@clz(buf) < top_bit_count) return Error.nif_argument_range_error;
 
                 return @intCast(T, buf);
             },
@@ -117,7 +117,7 @@ pub fn get_int(comptime T: type, env: beam.env, src: beam.term) !T {
                 std.mem.copy(u8, @ptrCast([*]u8, &buf)[0..bytes], result.data[0..bytes]);
                 // check to make sure that the top bits are all zeros.
                 const top_bit_count = (bytes * 8 - int.bits);
-                if (@clz(Bigger, buf) < top_bit_count) return Error.nif_argument_range_error;
+                if (@clz(buf) < top_bit_count) return Error.nif_argument_range_error;
 
                 return @intCast(T, buf);
             },
