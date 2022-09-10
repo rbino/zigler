@@ -60,6 +60,9 @@ defprotocol Zig.Type do
       ".beam.term" ->
         :term
 
+      "bool" ->
+        :bool
+
       %{"type" => "integer"} ->
         Integer.from_json(json)
 
@@ -103,12 +106,14 @@ end
 defimpl Zig.Type, for: Atom do
   def marshal_param(:env), do: nil
   def marshal_param(:term), do: nil
+  def marshal_param(:bool), do: nil
 
   def marshal_param(type) do
     raise "#{type} should not be a call type for elixir."
   end
 
   def marshal_return(:term), do: nil
+  def marshal_return(:bool), do: nil
 
   def marshal_return(type) do
     raise "#{type} should not be a return type for elixir."
